@@ -1,0 +1,55 @@
+;
+; Delbin Chromebook Audio Driver INF
+; Platforme: Intel Tiger Lake (TGL)
+; Controleur: Intel HD Audio (PCI\VEN_8086&DEV_A0C8)
+; Compatible: Windows 11 x64
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=Media
+ClassGuid={4d36e96c-e325-11ce-bfc1-08002be10318}
+Provider=%ManufacturerName%
+CatalogFile=delbinaudio.cat
+DriverVer=01/01/2024,1.0.0.0
+PnpLockPolicy=0x00000000
+
+[SourceDisksNames]
+1=%DiskName%,,,""
+
+[SourceDisksFiles]
+; Drivers à compiler
+; delbin_audio.sys=1
+; intel_sst_audio.sys=1
+
+[DestinationDirs]
+DefaultDestDir = 12
+Delbin_Audio_Device.DriverFiles = 12
+
+[Manufacturer]
+%ManufacturerName%=Standard,NTamd64
+
+[Standard.NTamd64]
+; ID matériel détecté: PCI\VEN_8086&DEV_A0C8&SUBSYS_00000000&REV_20
+%DeviceDesc%=Delbin_Audio_Device, PCI\VEN_8086&DEV_A0C8&SUBSYS_00000000&REV_20
+
+[Delbin_Audio_Device]
+CopyFiles=Delbin_Audio_Device.DriverFiles
+AddReg=Delbin_Audio_Device.AddReg
+
+[Delbin_Audio_Device.DriverFiles]
+; Copie des fichiers pilote (après compilation)
+; delbin_audio.sys
+; intel_sst_audio.sys
+
+[Delbin_Audio_Device.AddReg]
+HKR,,DriverFlags,0x00010001,0x00000001
+HKR,,FriendlyName,,%FriendlyName%
+HKR,,Description,,%Description%
+
+[Strings]
+ManufacturerName="Delbin Chromebook Audio"
+DiskName="Delbin Audio Driver Installation Disk"
+DeviceDesc="Intel SST Audio Controller - Delbin Chromebook"
+FriendlyName="Delbin Chromebook Intel SST Audio"
+Description="Intel SST Audio Driver for ASUS Chromebook Vibe CX5/CX55 (delbin)"

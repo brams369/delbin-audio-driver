@@ -1,0 +1,46 @@
+# Configuration BIOS Delbin Chromebook (d'après analyses)
+
+## Analyses BIOS UEFI EDK2 Réalisées
+
+### Signatures Audio Trouvées
+- Intel HD Audio: 7 positions
+- Realtek ALC Codec: 12 positions  
+- Conexant CX Codec: 115 positions
+- HDA: 1 position
+- Pin configuration: 3 positions
+
+### Firmware Intel Audio Détecté
+- Kaby Lake Audio (offset: 0x01134034)
+- Gemini Lake Audio (offset: 0x0032DD5A)
+
+### ACPI Tables Audio
+- DSDT (Differentiated System Description Table) détectée
+- HPET (High Precision Event Timer) détecté
+
+## Configuration Matérielle Détectée sous Windows 11
+
+### ID Matériel
+PCI\VEN_8086&DEV_A0C8&SUBSYS_00000000&REV_20
+
+### Périphériques Audio
+- CoolStar HD Audio (OK) - Controleur principal
+- Realtek ALC5682 I2S Audio (Error) - Non reconnu
+- CoolStar SOF Audio (WDM) (Error) - Nécessite pilotes Intel SST
+- Maxim 98373 Audio Codec (OK)
+- HD Audio Driver for Display Audio (Unknown)
+
+### Services Audio
+- Audiosrv: Running - Automatic ✓
+- AudioEndpointBuilder: Running - Automatic ✓
+- MMCSS: Running - Automatic ✓
+
+## Recommandations Basées sur Analyses
+
+1. Utiliser Intel SST Audio Driver pour Tiger Lake
+2. Modifier le fichier INF avec l'ID matériel réel
+3. Le BIOS UEFI EDK2 contient déjà les configurations nécessaires
+4. Windows 11 détecte le contrôleur HDA mais manque les pilotes SST
+
+## Fichiers BIOS Extraits
+- BIOS UEFI EDK2: coreboot_edk2-delbin-mrchromebox_20260714.rom (32 MB)
+- Configuration audio extraite: audio_config_extracted.bin
