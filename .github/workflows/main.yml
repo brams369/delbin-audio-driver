@@ -38,7 +38,7 @@ jobs:
 
     - name: Build driver with MSBuild
       run: |
-        msbuild build/delbin_audio.vcxproj /p:Configuration=Release /p:Platform=x64
+         msbuild Delbin_Audio_Driver/build/delbin_audio.vcxproj /p:Configuration=Release /p:Platform=x64
 
     - name: Create driver package
       shell: pwsh
